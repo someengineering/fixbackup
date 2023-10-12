@@ -1,0 +1,18 @@
+boto3==1.28.63
+    # via fixbackup (pyproject.toml)
+botocore==1.31.63
+    # via
+    #   boto3
+    #   s3transfer
+jmespath==1.0.1
+    # via
+    #   boto3
+    #   botocore
+python-dateutil==2.8.2
+    # via botocore
+s3transfer==0.7.0
+    # via boto3
+six==1.16.0
+    # via python-dateutil
+urllib3==2.0.6
+    # via botocore
