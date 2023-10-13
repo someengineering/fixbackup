@@ -77,14 +77,18 @@ def backup(args: Namespace, backup_file_path: Path, timeout: int = 900, compress
             temp_dir,
             *args.arangodump_args,
         ]
+
         if args.arangodb_database:
             command.extend(["--server.database", args.arangodb_database])
         else:
             command.extend(["--all-databases", "true"])
+
         if args.arangodb_password:
             command.extend(["--server.password", args.arangodb_password])
+            log.debug(f"Running command: {' '.join(command).replace(str(args.arangodb_password), '********')}")
+        else:
+            log.debug(f"Running command: {' '.join(command)}")
 
-        log.debug(f"Running command: {' '.join(command)}")
         try:
             process = subprocess.Popen(command, stdout=subprocess.PIPE, stderr=subprocess.PIPE, env=env)
             stdout, stderr = process.communicate(timeout=timeout)
