@@ -75,3 +75,8 @@ def valid_ip(ip_str: str) -> bool:
         return True
     except ValueError:
         return False
+
+
+def valid_dbname(dbname: str) -> bool:
+    pattern = r"^[A-Za-z0-9_-]{1,255}$"
+    return bool(re.match(pattern, dbname))

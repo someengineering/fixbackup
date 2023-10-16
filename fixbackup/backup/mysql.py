@@ -40,6 +40,14 @@ def add_args(arg_parser: ArgumentParser) -> None:
     )
 
     arg_parser.add_argument(
+        "--mysql-database",
+        help="MySQL database",
+        dest="mysql_database",
+        type=str,
+        default=os.getenv("MYSQL_DATABASE"),
+    )
+
+    arg_parser.add_argument(
         "--mysqldump-args",
         help="Extra arguments to pass to mysqldump",
         dest="mysqldump_args",
@@ -57,7 +65,6 @@ def backup(args: Namespace, backup_file_path: Path, timeout: int = 900, compress
     env = os.environ.copy()
     command = [
         "mysqldump",
-        "--all-databases",
         "--add-drop-database",
         "--add-drop-table",
         "--add-drop-trigger",
@@ -72,6 +79,11 @@ def backup(args: Namespace, backup_file_path: Path, timeout: int = 900, compress
         str(args.mysql_user),
         *args.mysqldump_args,
     ]
+    if args.mysql_database:
+        command.append(args.mysql_database)
+    else:
+        command.append("--all-databases")
+
     if args.mysql_password:
         env["MYSQL_PWD"] = args.mysql_password
 
