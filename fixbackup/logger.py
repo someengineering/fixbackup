@@ -1,4 +1,3 @@
-from attrs import define, field
 from argparse import ArgumentParser
 from typing import ClassVar, Optional, Any
 import sys
@@ -51,13 +50,6 @@ def add_args(arg_parser: ArgumentParser) -> None:
         action="store_true",
         default=False,
     )
-
-
-@define
-class LoggingConfig:
-    kind: ClassVar[str] = "logging"
-    verbose: Optional[bool] = field(default=False, metadata={"description": "Verbose logging"})
-    quiet: Optional[bool] = field(default=False, metadata={"description": "Only log errors"})
 
 
 def setup_logger(
