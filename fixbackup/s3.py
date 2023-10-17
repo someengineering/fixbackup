@@ -1,3 +1,4 @@
+import os
 import boto3
 from pathlib import Path
 from argparse import ArgumentParser, Namespace
@@ -67,6 +68,7 @@ def add_args(parser: ArgumentParser) -> None:
         "--s3-bucket",
         dest="s3_bucket",
         help="AWS S3 bucket name",
+        default=os.getenv("S3_BUCKET"),
     )
     parser.add_argument(
         "--type", choices=backup_types, dest="backup_type", required=True, help="Type of backup to create."
