@@ -69,8 +69,6 @@ def backup(args: Namespace, backup_file_path: Path, timeout: int = 900, compress
         "--add-drop-table",
         "--add-drop-trigger",
         "--single-transaction",
-        "--compression-algorithms",
-        "zlib",
         "--host",
         str(args.mysql_host),
         "--port",
