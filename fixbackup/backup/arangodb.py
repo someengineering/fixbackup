@@ -56,6 +56,14 @@ def add_args(arg_parser: ArgumentParser) -> None:
         default=[],
     )
 
+    arg_parser.add_argument(
+        "--arangodb-tls",
+        help="ArangoDB uses TLS",
+        dest="arangodb_tls",
+        action="store_true",
+        default=False,
+    )
+
 
 def backup(args: Namespace, backup_file_path: Path, timeout: int = 900, compress: bool = True) -> bool:
     log.info("Starting ArangoDB backup...")
@@ -65,10 +73,14 @@ def backup(args: Namespace, backup_file_path: Path, timeout: int = 900, compress
 
     with tempfile.TemporaryDirectory() as temp_dir:
         env = os.environ.copy()
+        if args.arangodb_tls:
+            protocol = "ssl"
+        else:
+            protocol = "tcp"
         command = [
             "arangodump",
             "--server.endpoint",
-            f"tcp://{args.arangodb_host}:{args.arangodb_port}",
+            f"{protocol}://{args.arangodb_host}:{args.arangodb_port}",
             "--server.username",
             args.arangodb_username,
             "--overwrite",
