@@ -26,7 +26,6 @@ def upload_backups(args: Namespace, backup_directory: Path, backup_files: List[P
     log.info(f"Syncing backups to S3 bucket {bucket_name}/{prefix}")
     bucket = resource.Bucket(bucket_name)
     for backup_file in backup_files:
-        print(f"Replacing {backup_file} with {backup_directory}")
         dst = str(backup_file.absolute()).replace(str(backup_directory.absolute()), "", 1).lstrip("/")
         if prefix != "":
             dst = f"{prefix}/{dst}"
