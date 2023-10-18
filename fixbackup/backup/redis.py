@@ -55,6 +55,22 @@ def add_args(arg_parser: ArgumentParser) -> None:
         default=[],
     )
 
+    arg_parser.add_argument(
+        "--redis-tls",
+        help="Redis uses TLS",
+        dest="redis_tls",
+        action="store_true",
+        default=False,
+    )
+
+    arg_parser.add_argument(
+        "--redis-tls-insecure",
+        help="Redis uses TLS without verifying the certificate",
+        dest="redis_tls_insecure",
+        action="store_true",
+        default=False,
+    )
+
 
 def backup(args: Namespace, backup_file_path: Path, timeout: int = 900, compress: bool = True) -> bool:
     log.info("Starting Redis backup...")
@@ -79,6 +95,10 @@ def backup(args: Namespace, backup_file_path: Path, timeout: int = 900, compress
         command.extend(["--user", args.redis_username])
     if args.redis_password:
         env["REDISCLI_AUTH"] = args.redis_password
+    if args.redis_tls:
+        command.append("--tls")
+    if args.redis_tls_insecure:
+        command.append("--insecure")
 
     log.debug(f"Running command: {' '.join(command)}")
     try:
