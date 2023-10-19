@@ -11,6 +11,7 @@ from .s3 import upload_backups, add_args as s3_add_args, set_lifecycle_policy
 
 def main() -> None:
     args = parse_args([logging_add_args, s3_add_args, *backup_add_args])
+    exit_code = 0
     log.info("Starting FIX Databases Backup System")
 
     if not verify_binaries():
@@ -37,7 +38,8 @@ def main() -> None:
         if args.set_lifecycle_policy:
             set_lifecycle_policy(args)
 
-        backup_files = backup(args, backup_directory)
+        backup_files, all_success = backup(args, backup_directory)
+        exit_code = 0 if all_success else 1
         if len(backup_files) > 0:
             upload_backups(args, backup_directory, backup_files)
     finally:
@@ -51,8 +53,11 @@ def main() -> None:
         except OSError:
             pass
 
+    if not all_success:
+        exit_code = 1
+
     log.info("Shutdown complete")
-    sys.exit(0)
+    sys.exit(exit_code)
 
 
 if __name__ == "__main__":
