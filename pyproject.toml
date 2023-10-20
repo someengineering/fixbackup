@@ -1,6 +1,6 @@
 [project]
 name = "fixbackup"
-version = "0.0.4"
+version = "0.0.5"
 authors = [{name="Some Engineering Inc."}]
 description = "FIX Database Backup System"
 license = {file="LICENSE"}
