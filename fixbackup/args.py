@@ -12,6 +12,13 @@ def parse_args(add_args: List[Callable[[ArgumentParser], None]]) -> Namespace:
         type=str,
         default=os.getenv("BACKUP_DIRECTORY", "."),
     )
+    arg_parser.add_argument(
+        "-n",
+        "--name",
+        dest="environment",
+        help="Name of the environment",
+        default=os.getenv("FIX_ENVIRONMENT", "dev"),
+    )
 
     for add_arg in add_args:
         add_arg(arg_parser)

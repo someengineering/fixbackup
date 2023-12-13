@@ -13,13 +13,14 @@ add_args = [redis_add_args, mysql_add_args, arangodb_add_args]
 def backup(args: Namespace, backup_directory: Path) -> Tuple[List[Path], bool]:
     result: List[Path] = []
     all_success = True
+    environment = args.environment
     date_prefix = datetime.utcnow().strftime("%Y%m%d%H%M")
 
     if args.redis_host and (valid_hostname(args.redis_host) or valid_ip(args.redis_host)):
         db = str(args.redis_database_number)
         if not valid_dbname(db):
             raise ValueError(f"Invalid database name: {db}")
-        redis_backup_file = backup_directory / f"{date_prefix}-redis-{args.redis_host}-{db}.rdb.gz"
+        redis_backup_file = backup_directory / f"{environment}-{date_prefix}-redis-{args.redis_host}-{db}.rdb.gz"
         if redis_backup(args, redis_backup_file):
             result.append(redis_backup_file)
         else:
@@ -32,7 +33,7 @@ def backup(args: Namespace, backup_directory: Path) -> Tuple[List[Path], bool]:
                 raise ValueError(f"Invalid database name: {db}")
         else:
             db = "all"
-        mysql_backup_file = backup_directory / f"{date_prefix}-mysql-{args.mysql_host}-{db}.sql.gz"
+        mysql_backup_file = backup_directory / f"{environment}-{date_prefix}-mysql-{args.mysql_host}-{db}.sql.gz"
         if mysql_backup(args, mysql_backup_file):
             result.append(mysql_backup_file)
         else:
@@ -45,7 +46,7 @@ def backup(args: Namespace, backup_directory: Path) -> Tuple[List[Path], bool]:
                 raise ValueError(f"Invalid database name: {db}")
         else:
             db = "all"
-        arangodb_backup_file = backup_directory / f"{date_prefix}-arangodb-{args.arangodb_host}-{db}.tar.gz"
+        arangodb_backup_file = backup_directory / f"{environment}-{date_prefix}-arangodb-{args.arangodb_host}-{db}.tar.gz"
         if arangodb_backup(args, arangodb_backup_file):
             result.append(arangodb_backup_file)
         else:
