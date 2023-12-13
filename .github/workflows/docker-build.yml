@@ -54,8 +54,8 @@ jobs:
             type=sha,prefix=
             type=edge
           labels: |
-            org.opencontainers.image.title=fixca
-            org.opencontainers.image.description=FIX Certificate Authority
+            org.opencontainers.image.title=fixbackup
+            org.opencontainers.image.description=FIX DB Backup System
             org.opencontainers.image.vendor=Some Engineering Inc.
 
       - name: Set up QEMU
