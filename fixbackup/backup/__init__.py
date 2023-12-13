@@ -46,7 +46,9 @@ def backup(args: Namespace, backup_directory: Path) -> Tuple[List[Path], bool]:
                 raise ValueError(f"Invalid database name: {db}")
         else:
             db = "all"
-        arangodb_backup_file = backup_directory / f"{environment}-{date_prefix}-arangodb-{args.arangodb_host}-{db}.tar.gz"
+        arangodb_backup_file = (
+            backup_directory / f"{environment}-{date_prefix}-arangodb-{args.arangodb_host}-{db}.tar.gz"
+        )
         if arangodb_backup(args, arangodb_backup_file):
             result.append(arangodb_backup_file)
         else:
