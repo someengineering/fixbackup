@@ -2,7 +2,7 @@ astroid==3.0.0
     # via pylint
 attrs==23.1.0
     # via hypothesis
-black==23.9.1
+black==24.3.0
     # via fixbackup (pyproject.toml)
 boto3==1.28.63
     # via fixbackup (pyproject.toml)
