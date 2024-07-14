@@ -4,7 +4,7 @@ from typing import Callable, List
 
 
 def parse_args(add_args: List[Callable[[ArgumentParser], None]]) -> Namespace:
-    arg_parser = ArgumentParser(prog="fixbackup", description="FIX Database Backup System")
+    arg_parser = ArgumentParser(prog="fixbackup", description="Fix Database Backup and Restore System")
     arg_parser.add_argument(
         "--backup-directory",
         help="Directory where backups are created",
@@ -18,6 +18,20 @@ def parse_args(add_args: List[Callable[[ArgumentParser], None]]) -> Namespace:
         dest="environment",
         help="Name of the environment",
         default=os.getenv("FIX_ENVIRONMENT", "dev"),
+    )
+    arg_parser.add_argument(
+        "--sleep",
+        help="Don't do anything, just sleep forever",
+        dest="sleep",
+        action="store_true",
+        default=False,
+    )
+    arg_parser.add_argument(
+        "--restore",
+        help="Restore databases from directory",
+        dest="restore",
+        action="store_true",
+        default=False,
     )
 
     for add_arg in add_args:
