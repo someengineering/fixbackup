@@ -26,9 +26,9 @@ def add_args(arg_parser: ArgumentParser) -> None:
     arg_parser.add_argument(
         "--pg-user",
         help="PostgreSQL user",
-        dest="gp_user",
+        dest="pg_user",
         type=str,
-        default=os.getenv("PG_USER", "root"),
+        default=os.getenv("PG_USER", "postgres"),
     )
 
     arg_parser.add_argument(
