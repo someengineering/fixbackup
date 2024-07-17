@@ -4,7 +4,7 @@ from typing import Callable, List
 
 
 def parse_args(add_args: List[Callable[[ArgumentParser], None]]) -> Namespace:
-    arg_parser = ArgumentParser(prog="fixbackup", description="FIX Database Backup System")
+    arg_parser = ArgumentParser(prog="fixbackup", description="Fix Database Backup System")
     arg_parser.add_argument(
         "--backup-directory",
         help="Directory where backups are created",
