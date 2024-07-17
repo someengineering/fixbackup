@@ -1,12 +1,14 @@
 # `fixbackup` - Fix Database Backup System
 
+A wrapper tool packaged as a container, that runs as a job, creates backups of various databases, and uploads them to an S3 bucket.
+
 ## Usage
 
 ```bash
 usage: fixbackup [-h] [--backup-directory BACKUP_DIRECTORY] [-n ENVIRONMENT] [--sleep] [--verbose | --trace | --quiet] [--s3-bucket S3_BUCKET] --type {daily,weekly,monthly,yearly} [--set-lifecycle-policy] [--redis-host REDIS_HOST]
                  [--redis-port REDIS_PORT] [--redis-username REDIS_USERNAME] [--redis-password REDIS_PASSWORD] [--redis-database-number REDIS_DATABASE_NUMBER] [--redis-cli-args REDIS_CLI_ARGS] [--redis-tls] [--redis-tls-insecure]
                  [--mysql-host MYSQL_HOST] [--mysql-port MYSQL_PORT] [--mysql-user MYSQL_USER] [--mysql-password MYSQL_PASSWORD] [--mysql-database MYSQL_DATABASE] [--mysqldump-args MYSQLDUMP_ARGS] [--pg-host PG_HOST]
-                 [--pg-port PG_PORT] [--pg-user GP_USER] [--pg-password PG_PASSWORD] [--pg-database PG_DATABASE] [--pg-dump-args PG_DUMP_ARGS] [--arangodb-host ARANGODB_HOST] [--arangodb-port ARANGODB_PORT]
+                 [--pg-port PG_PORT] [--pg-user PG_USER] [--pg-password PG_PASSWORD] [--pg-database PG_DATABASE] [--pg-dump-args PG_DUMP_ARGS] [--arangodb-host ARANGODB_HOST] [--arangodb-port ARANGODB_PORT]
                  [--arangodb-username ARANGODB_USERNAME] [--arangodb-password ARANGODB_PASSWORD] [--arangodb-database ARANGODB_DATABASE] [--arangodump-args ARANGODUMP_ARGS] [--arangodb-tls]
 
 Fix Database Backup System
@@ -55,7 +57,7 @@ options:
                         Extra arguments to pass to mysqldump
   --pg-host PG_HOST     PostgreSQL host
   --pg-port PG_PORT     PostgreSQL port
-  --pg-user GP_USER     PostgreSQL user
+  --pg-user PG_USER     PostgreSQL user
   --pg-password PG_PASSWORD
                         PostgreSQL password
   --pg-database PG_DATABASE
