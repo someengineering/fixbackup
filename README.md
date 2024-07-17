@@ -1,5 +1,7 @@
 # `fixbackup` - Fix Database Backup System
 
+A wrapper tool packaged as a container, that runs as a job, creates backups of various databases, and uploads them to an S3 bucket.
+
 ## Usage
 
 ```bash
