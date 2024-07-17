@@ -47,7 +47,7 @@ def backup(args: Namespace, backup_directory: Path) -> Tuple[List[Path], bool]:
                 raise ValueError(f"Invalid database name: {db}")
         else:
             db = "all"
-        pg_backup_file = backup_directory / f"{environment}-{date_prefix}-mysql-{args.pg_host}-{db}.sql.gz"
+        pg_backup_file = backup_directory / f"{environment}-{date_prefix}-postgresql-{args.pg_host}-{db}.sql.gz"
         if pg_backup(args, pg_backup_file):
             result.append(pg_backup_file)
         else:
