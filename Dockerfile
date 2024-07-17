@@ -68,7 +68,7 @@ RUN groupadd -g "${PGID:-0}" -o fix \
         python3-pip \
         redis-tools \
         mysql-client \
-        postgresql \
+        postgresql-client \
     && dpkg -i /usr/local/tmp/arangodb3-client_*.deb \
     && ln -s /usr/bin/busybox /usr/local/bin/vi \
     && ln -s /usr/bin/busybox /usr/local/bin/wget \
