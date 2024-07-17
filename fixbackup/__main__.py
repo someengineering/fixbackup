@@ -1,5 +1,6 @@
 import sys
 import os
+import time
 from pathlib import Path
 from typing import List
 from .logger import add_args as logging_add_args, log
@@ -12,10 +13,23 @@ from .s3 import upload_backups, add_args as s3_add_args, set_lifecycle_policy
 def main() -> None:
     args = parse_args([logging_add_args, s3_add_args, *backup_add_args])
     exit_code = 0
-    log.info("Starting FIX Databases Backup System")
+    log.info("Starting Fix Databases Backup System")
 
     if not verify_binaries():
         sys.exit(1)
+
+    if args.sleep:
+        # This option is used to keep the container running for debugging purposes.
+        # It allows you to connect to it inside of e.g. a K8s environment
+        # and manually test the backup process. Alternatively, you could
+        # override the entrypoint of the container and sleep indefinitely.
+        log.info("Sleeping forever")
+        try:
+            while True:
+                time.sleep(300)
+        finally:
+            log.info("Shutdown complete")
+            sys.exit(0)
 
     backup_directory = Path(args.backup_directory)
     rmdir_backup_directory = True

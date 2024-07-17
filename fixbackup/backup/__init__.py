@@ -8,7 +8,7 @@ from .postgresql import backup as pg_backup, add_args as postgresql_add_args
 from .arangodb import backup as arangodb_backup, add_args as arangodb_add_args
 from ..utils import valid_hostname, valid_ip, valid_dbname
 
-add_args = [redis_add_args, mysql_add_args, arangodb_add_args, postgresql_add_args]
+add_args = [redis_add_args, mysql_add_args, postgresql_add_args, arangodb_add_args]
 
 
 def backup(args: Namespace, backup_directory: Path) -> Tuple[List[Path], bool]:
