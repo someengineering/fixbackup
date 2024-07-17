@@ -72,7 +72,7 @@ def backup(args: Namespace, backup_file_path: Path, timeout: int = 900, compress
         str(args.pg_host),
         "-p",
         str(args.pg_port),
-        "-u",
+        "-U",
         str(args.pg_user),
         *args.pg_dump_args,
     ]
