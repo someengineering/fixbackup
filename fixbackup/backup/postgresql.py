@@ -66,6 +66,7 @@ def backup(args: Namespace, backup_file_path: Path, timeout: int = 900, compress
     command = [
         "pg_dump",
         "-w",
+        "-c",
         "--if-exists",
         "--inserts",
         "-h",
